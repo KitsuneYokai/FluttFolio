@@ -41,9 +41,12 @@ void main() async {
   if (layout.isEmpty) {
     isEditMode = true;
   }
+
+  // TODO: implement theme loading from theme.json
+
   // initialize the FluttFolio class
   final FluttFolio fluttFolioClass =
-      FluttFolio(layout: layout, isEditingMode: isEditMode);
+      FluttFolio(layout: layout, isEditingMode: isEditMode, settings: settings);
 
   // run the app in a ChangeNotifierProvider
   runApp(ChangeNotifierProvider(

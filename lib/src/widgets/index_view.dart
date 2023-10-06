@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutt_folio/src/classes/click_listener.dart';
 import 'package:flutt_folio/src/classes/flutt_folio.dart';
-import 'package:flutt_folio/src/widgets/json_exporter_view.dart';
+import 'package:flutt_folio/src/widgets/exporter/exporter_view.dart';
 import 'package:flutt_folio/src/widgets/selector/selectable_widgets_view.dart';
 import 'package:flutt_folio/src/widgets/settings/settings_view.dart';
 import 'package:flutter/foundation.dart';

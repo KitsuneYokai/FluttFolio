@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class FluttFolio with ChangeNotifier {
   // vars
   late Map<String, dynamic> layout;
+  late Map<String, dynamic> settings;
   late bool isEditingMode;
 
   final String widgetSelectorJson = '''
@@ -30,10 +31,14 @@ class FluttFolio with ChangeNotifier {
   ''';
 
   // constructor
-  FluttFolio({required this.layout, required this.isEditingMode});
+  FluttFolio(
+      {required this.layout,
+      required this.isEditingMode,
+      required this.settings});
 
   //getter
   Map<String, dynamic> get jsonLayout => _getJsonLayoutString();
+  Map<String, dynamic> get jsonSettings => settings;
 
   // methods
   Map<String, dynamic> _getJsonLayoutString() {
