@@ -34,20 +34,17 @@ class FluttFolio with ChangeNotifier {
   FluttFolio(
       {required this.layout,
       required this.isEditingMode,
-      required this.settings});
+      required this.settings}) {
+    if (kDebugMode || isEditingMode) {
+      layout = _fillNullChildWithWidgetSelector(layout);
+    }
+  }
 
   //getter
-  Map<String, dynamic> get jsonLayout => _getJsonLayoutString();
+  Map<String, dynamic> get jsonLayout => layout;
   Map<String, dynamic> get jsonSettings => settings;
 
   // methods
-  Map<String, dynamic> _getJsonLayoutString() {
-    if (kDebugMode || isEditingMode) {
-      return _fillNullChildWithWidgetSelector(layout);
-    }
-    return layout;
-  }
-
   Map<String, dynamic> _fillNullChildWithWidgetSelector(
       Map<String, dynamic> jsonMap) {
     // add the widget selector to all null children

@@ -18,7 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // try loading the settings and layout json files
-  Map<String, dynamic> settings = {"isEditMode": false};
+  Map<String, dynamic> settings = {"isEditMode": false, "title": "FluttFolio"};
   try {
     settings = jsonDecode(await rootBundle.loadString('assets/settings.json'));
   } catch (e) {

@@ -9,8 +9,8 @@ class JsonExporter extends StatelessWidget {
     return DefaultTabController(
         initialIndex: 0,
         length: 3,
-        child: Material(
-            child: Padding(
+        child: Scaffold(
+            body: Padding(
           padding: const EdgeInsets.all(5),
           child: Column(
             children: [

@@ -56,7 +56,7 @@ class WidgetCard extends StatelessWidget {
                   },
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green)),
-                  child: const Icon(Icons.add),
+                  child: const Icon(Icons.add, color: Colors.white),
                 ),
               )
             ],

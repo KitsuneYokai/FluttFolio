@@ -14,12 +14,12 @@ class ExporterTabView extends StatelessWidget {
     final TextEditingController jsonTextField = TextEditingController();
     // dynamically build the tab views based on the type
     if (type == "layout") {
-      jsonTextField.text =
-          jsonEncode(Provider.of<FluttFolio>(context).jsonLayout);
+      jsonTextField.text = const JsonEncoder.withIndent('  ').convert(
+          jsonDecode(jsonEncode(Provider.of<FluttFolio>(context).jsonLayout)));
       // TODO: remove the buttons with click_event = open://WidgetSelector
     } else if (type == "settings") {
-      jsonTextField.text =
-          jsonEncode(Provider.of<FluttFolio>(context).settings);
+      jsonTextField.text = const JsonEncoder.withIndent('  ').convert(
+          jsonDecode(jsonEncode(Provider.of<FluttFolio>(context).settings)));
     } else if (type == "theme") {
       jsonTextField.text = '{"error": "Not implemented yet"}';
     }
@@ -63,8 +63,12 @@ class ExporterTabView extends StatelessWidget {
               onPressed: () {
                 // copy the json to clipboard
                 Clipboard.setData(ClipboardData(text: jsonTextField.text));
+                // show a snackbar
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Copied $type.json to your clipboard"),
+                    duration: const Duration(seconds: 3)));
               },
-              child: Text("Copy to clipboard")),
+              child: const Text("Copy to clipboard")),
         )
       ]),
     );
