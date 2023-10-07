@@ -1,6 +1,8 @@
-import 'package:flutt_folio/src/classes/flutt_folio.dart';
+import 'package:flutt_folio/src/widgets/exporter/exporter_view.dart';
+import 'package:flutt_folio/src/widgets/settings/general_tab.dart';
+import 'package:flutt_folio/src/widgets/settings/seo_tab.dart';
+import 'package:flutt_folio/src/widgets/settings/theme_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -14,7 +16,6 @@ class SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    final fluttFolio = Provider.of<FluttFolio>(context);
     return Material(
       child: Row(
         children: [
@@ -33,7 +34,7 @@ class SettingsViewState extends State<SettingsView> {
             },
             destinations: const [
               NavigationRailDestination(
-                icon: Icon(Icons.category),
+                icon: Icon(Icons.category_outlined),
                 selectedIcon: Icon(Icons.category),
                 label: Text('General'),
               ),
@@ -43,10 +44,14 @@ class SettingsViewState extends State<SettingsView> {
                 label: Text('SEO'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.color_lens),
+                icon: Icon(Icons.color_lens_outlined),
                 selectedIcon: Icon(Icons.color_lens),
                 label: Text('Theme'),
               ),
+              NavigationRailDestination(
+                  icon: Icon(Icons.save_outlined),
+                  selectedIcon: Icon(Icons.save),
+                  label: Text('Exporter')),
             ],
           ),
           Expanded(
@@ -69,7 +74,17 @@ class SettingsViewState extends State<SettingsView> {
                   ],
                 ),
                 const Divider(),
-                Text(fluttFolio.settings["title"]),
+                if (_selectedIndex == 0)
+                  GeneralSettingsTab()
+                else if (_selectedIndex == 1)
+                  const SeoSettingsTab()
+                else if (_selectedIndex == 2)
+                  const ThemeSettingsTab()
+                else if (_selectedIndex == 3)
+                  const Expanded(
+                      child: JsonExporter(
+                    showCloseButton: false,
+                  ))
               ],
             ),
           ))

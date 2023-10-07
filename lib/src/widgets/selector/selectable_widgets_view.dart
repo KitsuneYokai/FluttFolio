@@ -4,7 +4,11 @@ import 'package:flutt_folio/src/widgets/selector/widget_factory_view.dart';
 import 'package:flutter/material.dart';
 
 class SelectableWidgetsView extends StatelessWidget {
-  const SelectableWidgetsView({Key? key}) : super(key: key);
+  final int jsonIndexReplacementNumber;
+
+  const SelectableWidgetsView(
+      {Key? key, required this.jsonIndexReplacementNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class SelectableWidgetsView extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(("Widget Selector"),
+                    Text(("Widget Selector $jsonIndexReplacementNumber"),
                         style: Theme.of(context).textTheme.titleLarge),
                     const Spacer(),
                     IconButton(
@@ -40,9 +44,8 @@ class SelectableWidgetsView extends StatelessWidget {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Wrap(
-                      alignment: WrapAlignment.spaceAround,
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      runAlignment: WrapAlignment.spaceAround,
+                      runAlignment: WrapAlignment.spaceEvenly,
                       children: [
                         for (var widget in selectableWidgets) ...[
                           WidgetCard(
@@ -60,7 +63,8 @@ class SelectableWidgetsView extends StatelessWidget {
   }
 }
 
-Future showSelectableWidgetsView(BuildContext context) async {
+Future showSelectableWidgetsView(
+    BuildContext context, int jsonReplacementIndexNumber) async {
   return await showGeneralDialog(
     context: context,
     barrierDismissible: false,
@@ -69,7 +73,9 @@ Future showSelectableWidgetsView(BuildContext context) async {
     transitionDuration: const Duration(milliseconds: 400),
     pageBuilder: (BuildContext buildContext, Animation animation,
         Animation secondaryAnimation) {
-      return const SelectableWidgetsView();
+      return SelectableWidgetsView(
+        jsonIndexReplacementNumber: jsonReplacementIndexNumber,
+      );
     },
   );
 }

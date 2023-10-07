@@ -8,6 +8,7 @@ class FluttFolio with ChangeNotifier {
   late Map<String, dynamic> settings;
   late bool isEditingMode;
 
+  final String widgetSelectorClickEvent = "open://WidgetSelector";
   final String widgetSelectorJson = '''
   {
     "type": "ElevatedButton",
@@ -18,7 +19,7 @@ class FluttFolio with ChangeNotifier {
     "elevation": null,
     "padding": null,
     "textStyle": null,
-    "click_event": "open://WidgetSelector",
+    "click_event": null,
     "child": {
       "type": "Icon",
       "data": "add",
@@ -44,6 +45,17 @@ class FluttFolio with ChangeNotifier {
   Map<String, dynamic> get jsonLayout => layout;
   Map<String, dynamic> get jsonSettings => settings;
 
+  // setter
+  set jsonLayout(Map<String, dynamic> newLayout) {
+    layout = newLayout;
+    notifyListeners();
+  }
+
+  set jsonSettings(Map<String, dynamic> newSettings) {
+    settings = newSettings;
+    notifyListeners();
+  }
+
   // methods
   Map<String, dynamic> _fillNullChildWithWidgetSelector(
       Map<String, dynamic> jsonMap) {
@@ -58,7 +70,12 @@ class FluttFolio with ChangeNotifier {
     void traverse(dynamic node) {
       if (node is Map<String, dynamic>) {
         if (node.containsKey("children") && node["children"] is List) {
-          node["children"].add(json.decode(widgetSelectorJson));
+          // add a :<json index number> to the click event
+          Map<String, dynamic> widgetSelectorJson =
+              json.decode(this.widgetSelectorJson);
+          widgetSelectorJson["click_event"] =
+              "$widgetSelectorClickEvent-${node["children"].length + 1}";
+          node["children"].add(widgetSelectorJson);
         }
         for (var key in node.keys) {
           traverse(node[key]);
@@ -92,5 +109,9 @@ class FluttFolio with ChangeNotifier {
 
     traverse(jsonMap);
     return jsonMap;
+  }
+
+  notify() {
+    notifyListeners();
   }
 }

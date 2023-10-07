@@ -21,9 +21,11 @@ class WidgetCard extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: SizedBox(
         width: 400,
+        height: 250,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Align(
                 alignment: Alignment.centerLeft,

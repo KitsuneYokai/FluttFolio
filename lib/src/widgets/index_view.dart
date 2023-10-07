@@ -23,8 +23,6 @@ class IndexView extends StatelessWidget {
           jsonEncode(fluttFolio.jsonLayout), context, DefaultClickListener())!;
     }
 
-    print(jsonEncode(Provider.of<FluttFolio>(context).jsonLayout));
-
     return Title(
         title: fluttFolio.settings["title"] ?? "FluttFolio",
         color: Colors.white,
@@ -68,7 +66,7 @@ class IndexView extends StatelessWidget {
                     const SizedBox(height: 20),
                     ElevatedButton(
                         onPressed: () {
-                          showSelectableWidgetsView(context);
+                          showSelectableWidgetsView(context, -999);
                         },
                         child: const Icon(Icons.add)),
                   ],

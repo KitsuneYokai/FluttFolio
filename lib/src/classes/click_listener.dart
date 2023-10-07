@@ -7,13 +7,16 @@ class DefaultClickListener implements ClickListener {
   void onClicked(String? event) async {
     // here click events are handled
     if (event == null) return;
-    if (event == "open://WidgetSelector") await widgetSelectorPush();
+    if (event.contains("open://WidgetSelector")) {
+      var jsonIndex = int.parse(event.split("-")[1]);
+      await widgetSelectorPush(jsonIndex);
+    }
   }
 }
 
-Future widgetSelectorPush() async {
-  var test =
-      await showSelectableWidgetsView(navigatorKey.currentState!.context);
+Future widgetSelectorPush(jsonIndex) async {
+  var test = await showSelectableWidgetsView(
+      navigatorKey.currentState!.context, jsonIndex);
   // TODO: Create a reusable function to update the layout json file
   print(test);
 }

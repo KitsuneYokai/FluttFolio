@@ -39,7 +39,8 @@ class ExporterTabView extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border:
+                      Border.all(color: Theme.of(context).hintColor, width: 2),
                   borderRadius: BorderRadius.circular(5)),
               child: TextField(
                 maxLines: null,
@@ -49,7 +50,6 @@ class ExporterTabView extends StatelessWidget {
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.all(10),
                 ),
-                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ),
@@ -68,7 +68,8 @@ class ExporterTabView extends StatelessWidget {
                     content: Text("Copied $type.json to your clipboard"),
                     duration: const Duration(seconds: 3)));
               },
-              child: const Text("Copy to clipboard")),
+              child: const Text("Copy to clipboard",
+                  style: TextStyle(color: Colors.white))),
         )
       ]),
     );
