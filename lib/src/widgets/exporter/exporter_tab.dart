@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutt_folio/src/classes/flutt_folio.dart';
+import 'package:flutt_folio/src/helper/layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class ExporterTabView extends StatelessWidget {
     // dynamically build the tab views based on the type
     if (type == "layout") {
       jsonTextField.text = const JsonEncoder.withIndent('  ').convert(
-          jsonDecode(jsonEncode(Provider.of<FluttFolio>(context).jsonLayout)));
+          jsonDecode(jsonEncode(
+              getFinalLayoutMap(Provider.of<FluttFolio>(context).jsonLayout))));
       // TODO: remove the buttons with click_event = open://WidgetSelector
     } else if (type == "settings") {
       jsonTextField.text = const JsonEncoder.withIndent('  ').convert(

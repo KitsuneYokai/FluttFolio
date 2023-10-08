@@ -95,7 +95,11 @@ class FluttFolio with ChangeNotifier {
     void traverse(dynamic node) {
       if (node is Map<String, dynamic>) {
         if (node.containsKey("child") && node["child"] == null) {
-          node["child"] = json.decode(widgetSelectorJson);
+          Map<String, dynamic> widgetSelectorJson =
+              json.decode(this.widgetSelectorJson);
+          widgetSelectorJson["click_event"] =
+              "$widgetSelectorClickEvent-${node.length + 1}";
+          node["child"] = widgetSelectorJson;
         }
         for (var key in node.keys) {
           traverse(node[key]);
