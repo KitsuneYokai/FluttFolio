@@ -1,120 +1,39 @@
-import 'dart:convert';
-
+import 'package:flutt_folio/src/helper/layout.dart';
 import 'package:flutter/foundation.dart';
 
 class FluttFolio with ChangeNotifier {
   // vars
-  late Map<String, dynamic> layout;
-  late Map<String, dynamic> settings;
-  late bool isEditingMode;
-
-  final String widgetSelectorClickEvent = "open://WidgetSelector";
-  final String widgetSelectorJson = '''
-  {
-    "type": "ElevatedButton",
-    "foregroundColor": null,
-    "backgroundColor": null,
-    "overlayColor": null,
-    "shadowColor": null,
-    "elevation": null,
-    "padding": null,
-    "textStyle": null,
-    "click_event": null,
-    "child": {
-      "type": "Icon",
-      "data": "add",
-      "size": null,
-      "color": null,
-      "semanticLabel": null,
-      "textDirection": null
-    }
-  }
-  ''';
-
-  // constructor
-  FluttFolio(
-      {required this.layout,
-      required this.isEditingMode,
-      required this.settings}) {
-    if (kDebugMode || isEditingMode) {
-      layout = _fillNullChildWithWidgetSelector(layout);
-    }
-  }
+  late Map<String, dynamic> _layout;
+  late Map<String, dynamic> _settings;
+  late bool _isEditingMode;
 
   //getter
-  Map<String, dynamic> get jsonLayout => layout;
-  Map<String, dynamic> get jsonSettings => settings;
-
+  Map<String, dynamic> get jsonLayout => _layout;
+  Map<String, dynamic> get jsonSettings => _settings;
+  bool get isEditingMode => _isEditingMode;
   // setter
   set jsonLayout(Map<String, dynamic> newLayout) {
-    layout = newLayout;
+    _layout = newLayout;
     notifyListeners();
   }
 
   set jsonSettings(Map<String, dynamic> newSettings) {
-    settings = newSettings;
+    _settings = newSettings;
     notifyListeners();
   }
 
   // methods
-  Map<String, dynamic> _fillNullChildWithWidgetSelector(
-      Map<String, dynamic> jsonMap) {
-    // add the widget selector to all null children
-    jsonMap = _addWidgetToAllNullChild(jsonMap);
-    // add the widget selector to all children
-    jsonMap = _addWidgetToAllChildren(jsonMap);
-    return jsonMap;
-  }
-
-  Map<String, dynamic> _addWidgetToAllChildren(Map<String, dynamic> jsonMap) {
-    void traverse(dynamic node) {
-      if (node is Map<String, dynamic>) {
-        if (node.containsKey("children") && node["children"] is List) {
-          // add a :<json index number> to the click event
-          Map<String, dynamic> widgetSelectorJson =
-              json.decode(this.widgetSelectorJson);
-          widgetSelectorJson["click_event"] =
-              "$widgetSelectorClickEvent-${node["children"].length + 1}";
-          node["children"].add(widgetSelectorJson);
-        }
-        for (var key in node.keys) {
-          traverse(node[key]);
-        }
-      } else if (node is List) {
-        for (var item in node) {
-          traverse(item);
-        }
-      }
+  initialize(Map<String, dynamic> layout, Map<String, dynamic> settings,
+      bool isEditingMode) {
+    if (kDebugMode || isEditingMode) {
+      layout = fillNullChildWithEditorWidgets(layout);
     }
-
-    traverse(jsonMap);
-    return jsonMap;
+    _layout = layout;
+    _isEditingMode = isEditingMode;
+    _settings = settings;
   }
 
-  Map<String, dynamic> _addWidgetToAllNullChild(Map<String, dynamic> jsonMap) {
-    void traverse(dynamic node) {
-      if (node is Map<String, dynamic>) {
-        if (node.containsKey("child") && node["child"] == null) {
-          Map<String, dynamic> widgetSelectorJson =
-              json.decode(this.widgetSelectorJson);
-          widgetSelectorJson["click_event"] =
-              "$widgetSelectorClickEvent-${node.length + 1}";
-          node["child"] = widgetSelectorJson;
-        }
-        for (var key in node.keys) {
-          traverse(node[key]);
-        }
-      } else if (node is List) {
-        for (var item in node) {
-          traverse(item);
-        }
-      }
-    }
-
-    traverse(jsonMap);
-    return jsonMap;
-  }
-
+  // function to manually
   notify() {
     notifyListeners();
   }

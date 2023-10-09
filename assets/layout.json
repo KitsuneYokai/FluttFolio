@@ -1,9 +1,10 @@
 {
-  "type": "Container",
-  "alignment": null,
-  "padding": null,
-  "color": null,
-  "margin": null,
-  "constraints": null,
-  "child": null
+  "type": "Column",
+  "crossAxisAlignment": "center",
+  "mainAxisAlignment": "center",
+  "mainAxisSize": "max",
+  "textBaseline": "ideographic",
+  "textDirection": null,
+  "verticalDirection": "down",
+  "children": []
 }

@@ -24,7 +24,7 @@ class IndexView extends StatelessWidget {
     }
 
     return Title(
-        title: fluttFolio.settings["title"] ?? "FluttFolio",
+        title: fluttFolio.jsonSettings["title"] ?? "FluttFolio",
         color: Colors.white,
         child: Scaffold(
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,

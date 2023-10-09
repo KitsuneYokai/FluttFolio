@@ -1,6 +1,9 @@
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:flutt_folio/src/app.dart';
 import 'package:flutt_folio/src/widgets/selector/selectable_widgets_view.dart';
+import 'package:flutt_folio/src/helper/layout.dart';
+
+import 'package:flutt_folio/main.dart';
 
 class DefaultClickListener implements ClickListener {
   @override
@@ -15,8 +18,15 @@ class DefaultClickListener implements ClickListener {
 }
 
 Future widgetSelectorPush(jsonIndex) async {
-  var test = await showSelectableWidgetsView(
+  Map<String, dynamic>? selectedWidget = await showSelectableWidgetsView(
       navigatorKey.currentState!.context, jsonIndex);
-  // TODO: Create a reusable function to update the layout json file
-  print(test);
+
+  if (selectedWidget != null) {
+    Map<String, dynamic> addedJsonWidgetLayout =
+        replaceWidgetSelectorWithWidget(fluttFolioClass.jsonLayout,
+            "open://WidgetSelector-$jsonIndex", selectedWidget);
+    Map<String, dynamic> addedWidgetSelectorJson =
+        addWidgetSelectorToAllNullChildObjects(addedJsonWidgetLayout);
+    fluttFolioClass.jsonLayout = addedWidgetSelectorJson;
+  }
 }

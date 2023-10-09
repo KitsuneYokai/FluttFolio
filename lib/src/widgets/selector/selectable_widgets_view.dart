@@ -63,7 +63,7 @@ class SelectableWidgetsView extends StatelessWidget {
   }
 }
 
-Future showSelectableWidgetsView(
+Future<Map<String, dynamic>?> showSelectableWidgetsView(
     BuildContext context, int jsonReplacementIndexNumber) async {
   return await showGeneralDialog(
     context: context,

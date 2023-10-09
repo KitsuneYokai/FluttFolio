@@ -19,7 +19,7 @@ class GeneralSettingsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final fluttFolio = Provider.of<FluttFolio>(context);
     final TextEditingController titleController =
-        TextEditingController(text: fluttFolio.settings["title"]);
+        TextEditingController(text: fluttFolio.jsonSettings["title"]);
 
     return Expanded(
       child: Scaffold(
@@ -48,7 +48,7 @@ class GeneralSettingsTab extends StatelessWidget {
                 const Text("Layout Editing Mode"),
                 Switch(
                   thumbIcon: thumbIcon,
-                  value: fluttFolio.settings["isEditMode"],
+                  value: fluttFolio.jsonSettings["isEditMode"],
                   onChanged: (bool value) {
                     fluttFolio.jsonSettings["isEditMode"] = value;
                     fluttFolio.notify();

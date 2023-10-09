@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     final fluttFolio = Provider.of<FluttFolio>(context);
 
     return Title(
-        title: fluttFolio.settings["title"] ?? "FluttFolio",
+        title: fluttFolio.jsonSettings["title"] ?? "FluttFolio",
         color: Colors.white,
         child: MaterialApp(
           navigatorKey: navigatorKey,

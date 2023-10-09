@@ -18,10 +18,10 @@ class ExporterTabView extends StatelessWidget {
       jsonTextField.text = const JsonEncoder.withIndent('  ').convert(
           jsonDecode(jsonEncode(
               getFinalLayoutMap(Provider.of<FluttFolio>(context).jsonLayout))));
-      // TODO: remove the buttons with click_event = open://WidgetSelector
     } else if (type == "settings") {
       jsonTextField.text = const JsonEncoder.withIndent('  ').convert(
-          jsonDecode(jsonEncode(Provider.of<FluttFolio>(context).settings)));
+          jsonDecode(
+              jsonEncode(Provider.of<FluttFolio>(context).jsonSettings)));
     } else if (type == "theme") {
       jsonTextField.text = '{"error": "Not implemented yet"}';
     }

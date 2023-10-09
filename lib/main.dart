@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 
 import 'src/app.dart';
 
+final FluttFolio fluttFolioClass = FluttFolio();
+
 void main() async {
   // add the Custom Widget Parsers to dynamically build the widgets
   DynamicWidgetBuilder.addParser(InkWellParser());
@@ -45,8 +47,7 @@ void main() async {
   // TODO: implement theme loading from theme.json
 
   // initialize the FluttFolio class
-  final FluttFolio fluttFolioClass =
-      FluttFolio(layout: layout, isEditingMode: isEditMode, settings: settings);
+  fluttFolioClass.initialize(layout, settings, isEditMode);
 
   // run the app in a ChangeNotifierProvider
   runApp(ChangeNotifierProvider(
