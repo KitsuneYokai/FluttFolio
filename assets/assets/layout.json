@@ -1,0 +1,10 @@
+{
+  "type": "Column",
+  "crossAxisAlignment": "center",
+  "mainAxisAlignment": "center",
+  "mainAxisSize": "max",
+  "textBaseline": "ideographic",
+  "textDirection": null,
+  "verticalDirection": "down",
+  "children": []
+}
